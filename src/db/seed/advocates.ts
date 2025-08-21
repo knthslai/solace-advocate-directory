@@ -175,4 +175,10 @@ const advocateData = [
   },
 ];
 
-export { advocateData };
+async function seedAdvocates() {
+  for (const advocate of advocateData) {
+    await db.insert(advocates).values(advocate);
+  }
+}
+
+export { advocateData, seedAdvocates };
