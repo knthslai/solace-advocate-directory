@@ -1,19 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchAdvocates } from "../services/advocates";
+import { fetchAdvocates, FetchAdvocatesParams } from "../services/advocates";
 
-export const useAdvocates = (searchTerm?: string) => {
+// Main hook for paginated data with search, sorting, and pagination
+export const useAdvocatesPaginated = (params: FetchAdvocatesParams = {}) => {
   return useQuery({
-    queryKey: ["advocates", searchTerm],
-    queryFn: () => fetchAdvocates(searchTerm),
-    enabled: Boolean(searchTerm), // Only fetch when there's a search term
-    staleTime: 2 * 60 * 1000, // 2 minutes for search results
-  });
-};
-
-export const useAllAdvocates = () => {
-  return useQuery({
-    queryKey: ["advocates"],
-    queryFn: () => fetchAdvocates(),
-    staleTime: 5 * 60 * 1000, // 5 minutes for all advocates
+    queryKey: ["advocates", "paginated", params],
+    queryFn: () => fetchAdvocates(params),
+    staleTime: 2 * 60 * 1000, // 2 minutes for paginated results
+    placeholderData: (previousData) => previousData, // Keep previous data while loading new page
   });
 };
