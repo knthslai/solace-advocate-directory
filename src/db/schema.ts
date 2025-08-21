@@ -17,7 +17,7 @@ const advocates = pgTable("advocates", {
   degree: text("degree").notNull(),
   specialties: varchar("specialties", { length: 255 })
     .array()
-    .default([])
+    .default(sql`ARRAY[]::varchar(255)[]`)
     .notNull(),
   yearsOfExperience: integer("years_of_experience").notNull(),
   phoneNumber: bigint("phone_number", { mode: "number" }).notNull(),
