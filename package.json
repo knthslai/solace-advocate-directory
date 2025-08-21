@@ -10,12 +10,13 @@
     "lint:staged": "lint-staged",
     "generate": "drizzle-kit generate",
     "migrate:up": "node ./src/db/migrate.js",
-    "seed": "node --loader esbuild-register/loader -r esbuild-register ./src/db/seed/index.ts",
-    "db:setup": "docker compose up -d && npx drizzle-kit push && curl -X POST http://localhost:3000/api/seed",
-    "db:init": "npm run db:setup",
+    "seed": "npx tsx src/db/seed/index.ts",
+    "db:reset": "docker compose down && docker compose up -d && npx drizzle-kit push --force && npm run seed",
+    "db:setup": "docker compose up -d && npx drizzle-kit push --force && npm run seed",
     "prepare": "husky"
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
     "drizzle-orm": "^0.32.1",
     "next": "^14.2.19",
     "postgres": "^3.4.4",

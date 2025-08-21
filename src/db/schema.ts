@@ -6,7 +6,6 @@ import {
   serial,
   timestamp,
   bigint,
-  varchar,
 } from "drizzle-orm/pg-core";
 
 const advocates = pgTable("advocates", {
@@ -15,10 +14,10 @@ const advocates = pgTable("advocates", {
   lastName: text("last_name").notNull(),
   city: text("city").notNull(),
   degree: text("degree").notNull(),
-  specialties: varchar("specialties", { length: 255 })
+  specialties: text("specialties")
     .array()
-    .default(sql`ARRAY[]::varchar(255)[]`)
-    .notNull(),
+    .notNull()
+    .default(sql`'{}'::text[]`),
   yearsOfExperience: integer("years_of_experience").notNull(),
   phoneNumber: bigint("phone_number", { mode: "number" }).notNull(),
   createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
