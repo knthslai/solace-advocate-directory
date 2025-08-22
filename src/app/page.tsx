@@ -19,6 +19,7 @@ function HomeContent() {
   if (error) {
     return <ErrorDisplay />;
   }
+
   return (
     <main className="h-screen flex flex-col">
       <Header />
