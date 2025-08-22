@@ -1,5 +1,5 @@
 import { advocates } from "@/types/database";
-import { largeAdvocateDataset } from "./generate-large-dataset";
+import { advocateData } from "./advocates";
 import { count } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
@@ -12,7 +12,7 @@ async function main() {
   let sql: postgres.Sql | undefined;
 
   try {
-    console.log("🚀 Starting database seeding...");
+    console.log("🚀 Starting database seeding with static data...");
 
     if (!process.env.DATABASE_URL) {
       throw new Error("DATABASE_URL is not set");
@@ -33,10 +33,7 @@ async function main() {
       await db.delete(advocates);
     }
 
-    // Generate 1000 advocates as the new default
-    const advocateData = largeAdvocateDataset.small(); // 1000 records
-
-    console.log(`📝 Inserting ${advocateData.length} advocates...`);
+    console.log(`📝 Inserting ${advocateData.length} static advocates...`);
 
     // Use batch insert for better performance
     await db.insert(advocates).values(advocateData);
