@@ -1,18 +1,15 @@
 import React from "react";
-import { PaginationInfo } from "../services/advocates";
 import Button from "./Button";
+import { useAdvocatesContext } from "../app/contexts/AdvocatesContext";
 
 interface PaginationProps {
-  pagination: PaginationInfo;
-  onPageChange: (page: number) => void;
   className?: string;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
-  pagination,
-  onPageChange,
-  className = "",
-}) => {
+export const Pagination: React.FC<PaginationProps> = ({ className = "" }) => {
+  const { pagination, handlePageChange } = useAdvocatesContext();
+
+  if (!pagination) return null;
   const { page, totalPages, hasNextPage, hasPreviousPage, total } = pagination;
 
   const generatePageNumbers = () => {
@@ -59,7 +56,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   return (
     <div className={`flex flex-col items-center gap-4 my-5 ${className}`}>
-      <div className="text-gray-600 text-sm">
+      <div className="text-secondary-600 text-sm">
         <span>
           Showing page {page} of {totalPages} ({total.toLocaleString()} total)
         </span>
@@ -67,7 +64,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
       <div className="flex items-center flex-wrap justify-center gap-1">
         <Button
-          onClick={() => onPageChange(page - 1)}
+          onClick={() => handlePageChange(page - 1)}
           disabled={!hasPreviousPage}
           className="mr-2"
         >
@@ -77,7 +74,10 @@ export const Pagination: React.FC<PaginationProps> = ({
         {pageNumbers.map((pageNum, index) => {
           if (pageNum === "...") {
             return (
-              <span key={`ellipsis-${index}`} className="mx-2 text-gray-500">
+              <span
+                key={`ellipsis-${index}`}
+                className="mx-2 text-secondary-500"
+              >
                 ...
               </span>
             );
@@ -86,11 +86,11 @@ export const Pagination: React.FC<PaginationProps> = ({
           return (
             <Button
               key={pageNum}
-              onClick={() => onPageChange(pageNum as number)}
+              onClick={() => handlePageChange(pageNum as number)}
               className={`mx-1 ${
                 pageNum === page
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                  ? "!bg-primary-600 !text-white hover:bg-primary-700 border-primary-600"
+                  : "bg-white text-secondary-700 hover:bg-secondary-50 border-secondary-300"
               }`}
             >
               {pageNum}
@@ -99,7 +99,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         })}
 
         <Button
-          onClick={() => onPageChange(page + 1)}
+          onClick={() => handlePageChange(page + 1)}
           disabled={!hasNextPage}
           className="ml-2"
         >
