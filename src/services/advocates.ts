@@ -1,16 +1,45 @@
 import { Advocate } from "../types/database";
+import { simulateNetworkDelay } from "./performance-simulation";
+
+export interface PaginationInfo {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
 
 export interface AdvocatesResponse {
   data: Advocate[];
+  pagination: PaginationInfo;
+  search: string | null;
+}
+
+export interface FetchAdvocatesParams {
+  searchTerm?: string;
+  page?: number;
+  limit?: number;
 }
 
 export const fetchAdvocates = async (
-  searchTerm?: string
-): Promise<Advocate[]> => {
-  const url = searchTerm
-    ? `/api/advocates?search=${encodeURIComponent(searchTerm)}`
-    : "/api/advocates";
+  params: FetchAdvocatesParams = {}
+): Promise<AdvocatesResponse> => {
+  // Optional performance simulation for testing
+  await simulateNetworkDelay();
 
+  const { searchTerm, page = 1, limit = 50 } = params;
+
+  const searchParams = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  if (searchTerm) {
+    searchParams.append("search", searchTerm);
+  }
+
+  const url = `/api/advocates?${searchParams.toString()}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -18,5 +47,5 @@ export const fetchAdvocates = async (
   }
 
   const jsonResponse: AdvocatesResponse = await response.json();
-  return jsonResponse.data || [];
+  return jsonResponse;
 };

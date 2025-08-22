@@ -1,2 +1,2 @@
 export { useDebounce } from "./useDebounce";
-export { useAdvocates, useAllAdvocates } from "./useAdvocates";
+export { useAdvocatesPaginated } from "./useAdvocates";
