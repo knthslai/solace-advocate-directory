@@ -4,9 +4,7 @@
 
 ## Recent Enhancements (PR's)
 
-### PR: feat: Implement comprehensive type system with enhanced type safety and enforcement #3
-
-https://github.com/knthslai/solace-advocate-directory/pull/3
+### [PR: feat: Implement comprehensive type system with enhanced type safety and enforcement #3](https://github.com/knthslai/solace-advocate-directory/pull/3)
 
 **Scope:** Improves type safety, developer experience, and code quality across backend, API, and frontend.
 
@@ -30,9 +28,7 @@ https://github.com/knthslai/solace-advocate-directory/pull/3
 
 ---
 
-### PR: feat: Integrate TanStack Query for improved data fetching and state management #4
-
-https://github.com/knthslai/solace-advocate-directory/pull/4
+### [PR: feat: Integrate TanStack Query for improved data fetching and state management #4](https://github.com/knthslai/solace-advocate-directory/pull/4)
 
 **Scope:** Migrates data fetching from direct API calls to TanStack Query, improving caching, state management, and user experience.
 
@@ -57,9 +53,7 @@ https://github.com/knthslai/solace-advocate-directory/pull/4
 
 ---
 
-### PR: feat: Implement paginated advocates query with large dataset support and performance optimization #5
-
-https://github.com/knthslai/solace-advocate-directory/pull/5
+### [PR: feat: Implement paginated advocates query with large dataset support and performance optimization #5](https://github.com/knthslai/solace-advocate-directory/pull/5)
 
 **Scope:** Transforms advocates listing into a scalable, paginated system designed for large datasets (25K+ records) with performance testing and modern UI/UX improvements.
 
@@ -83,9 +77,7 @@ https://github.com/knthslai/solace-advocate-directory/pull/5
 
 ---
 
-### PR: feat: Comprehensive table UI overhaul with modular components and responsive design #6
-
-https://github.com/knthslai/solace-advocate-directory/pull/6
+### [PR: feat: Comprehensive table UI overhaul with modular components and responsive design #6](https://github.com/knthslai/solace-advocate-directory/pull/6)
 
 **Scope:** Refactors the AdvocatesTable into a modular, responsive, and visually enhanced system with improved maintainability and user experience.
 
