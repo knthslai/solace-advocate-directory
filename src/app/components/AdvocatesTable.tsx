@@ -6,10 +6,20 @@ import {
   LoadingTable,
   PhoneNumberCell,
 } from "./AdvocatesTable/";
+import {
+  HiOutlineUser,
+  HiOutlineUserGroup,
+  HiOutlineMapPin,
+  HiOutlineAcademicCap,
+  HiOutlineSparkles,
+  HiOutlineClock,
+  HiOutlinePhone,
+} from "react-icons/hi2";
 
 type ColumnConfig = {
   key: string;
   header: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   accessor: (advocate: any) => React.ReactNode;
   className?: string;
   minWidth?: string;
@@ -22,30 +32,35 @@ export default function AdvocatesTable() {
     {
       key: "firstName",
       header: "First Name",
+      icon: HiOutlineUser,
       accessor: (advocate) => advocate.firstName,
       minWidth: "120px",
     },
     {
       key: "lastName",
       header: "Last Name",
+      icon: HiOutlineUserGroup,
       accessor: (advocate) => advocate.lastName,
       minWidth: "150px",
     },
     {
       key: "city",
       header: "City",
+      icon: HiOutlineMapPin,
       accessor: (advocate) => advocate.city,
       minWidth: "120px",
     },
     {
       key: "degree",
       header: "Degree",
+      icon: HiOutlineAcademicCap,
       accessor: (advocate) => advocate.degree,
       minWidth: "70px",
     },
     {
       key: "specialties",
       header: "Specialties",
+      icon: HiOutlineSparkles,
       accessor: (advocate) => (
         <SpecialtiesCell specialties={advocate.specialties} />
       ),
@@ -53,14 +68,16 @@ export default function AdvocatesTable() {
     },
     {
       key: "yearsOfExperience",
-      header: "Years of Experience",
+      header: "Experience (Yrs)",
+      icon: HiOutlineClock,
       accessor: (advocate) => advocate.yearsOfExperience,
       className: "text-center",
-      minWidth: "100px",
+      minWidth: "160px",
     },
     {
       key: "phoneNumber",
       header: "Phone Number",
+      icon: HiOutlinePhone,
       accessor: (advocate) => (
         <PhoneNumberCell phoneNumber={advocate.phoneNumber} />
       ),
@@ -73,11 +90,12 @@ export default function AdvocatesTable() {
         <TableHeader columns={columns} />
         <tbody>
           {advocates && advocates.length > 0 ? (
-            advocates.map((advocate) => (
+            advocates.map((advocate, index) => (
               <TableRow
                 key={advocate.id}
                 advocate={advocate}
                 columns={columns}
+                index={index}
               />
             ))
           ) : (
