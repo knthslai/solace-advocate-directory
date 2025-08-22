@@ -15,23 +15,28 @@
 - Improved component prop typing and data handling in the frontend.
 - Implemented Husky + lint-staged pre-commit hooks and automated type checking.
 
-**Impact:**
+3. **Seed the database**
 
-- Stronger compile-time validation, reduced runtime errors, and enhanced IDE support.
-- Enforced code quality standards and automated checks across the team.
-- More efficient queries and improved database performance.
+```bash
+curl -X POST http://localhost:3000/api/seed
+```
 
-**Migration Notes:**
+4. **Start the development server**
 
-- Requires database schema update (jsonb → varchar[]).
-- Data migration/backup recommended before deployment.
+```bash
+npm run dev
+```
 
----
+### Database Configuration
 
-### [PR: feat: Integrate TanStack Query for improved data fetching and state management #4](https://github.com/knthslai/solace-advocate-directory/pull/4)
+The project uses PostgreSQL with Drizzle ORM. The database configuration is in `.env`:
 
-**Scope:** Migrates data fetching from direct API calls to TanStack Query, improving caching, state management, and user experience.
+```
+DATABASE_URL=postgresql://postgres:password@localhost/postgres
+```
 
+**Note**: The application will throw a clear error if `DATABASE_URL` is not set, ensuring configuration issues are caught early.
+=======
 **Key Changes:**
 
 - Integrated @tanstack/react-query with intelligent caching, background refetching, and devtools support.
@@ -99,3 +104,4 @@
 
 - Fully backward compatible with existing data structures and API contracts.
 - No breaking changes; drop-in replacement for existing table.
+
